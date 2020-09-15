@@ -1,0 +1,21 @@
+.scion {
+  width: 100%;
+  height: auto;
+  margin-bottom: -120px;
+}
+
+.card {
+  padding: 140px 32px 0px 32px;
+  height: 100%;
+
+  font-size: 1.8em;
+  background: #94385b;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.emphasis {
+  font-size: 2em;
+  font-weight: bold;
+  text-decoration: dashed;
+}
