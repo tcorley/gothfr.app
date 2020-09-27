@@ -12,14 +12,16 @@ type Payment = {
   date: string;
 };
 
-export default function CarView() {
+type Props = {
+  onLogout: () => void;
+}
+
+export default function CarView({ onLogout }: Props) {
   const { data, loading, error } = useGoogleSheets({
     apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
     sheetId: process.env.NEXT_PUBLIC_GOOGLE_SHEETS_ID,
     sheetsNames: ['payments', 'totals'],
   });
-
-  console.log({ data, loading, error });
 
   let paidAmount;
   let lastPayment;
@@ -44,7 +46,7 @@ export default function CarView() {
       />
       <div className={styles.card}>
         {loading && <p>loading</p>}
-        {data.length && (
+        {data.length > 0 && (
           <p>
             So far you've paid{' '}
             <span className={styles.emphasis}>${paidAmount}</span> of{' '}
@@ -55,6 +57,23 @@ export default function CarView() {
             <span className={styles.emphasis}>{lastPayment.date}</span>.
           </p>
         )}
+        <div className={styles.flex}>
+        <a href={'sms:' + process.env.NEXT_PUBLIC_PHONE_NUMBER} >
+          <img
+          src="/moneypayment.gif"
+          width="150"
+          />
+        </a>
+        <span className={styles.divider} />
+        <div className={styles.flex} onClick={onLogout}>
+        <img
+         src="/bomb.gif"
+         width="100"
+         height="100"
+         />
+         <p>logout</p>
+         </div>
+         </div>
       </div>
     </div>
   );
