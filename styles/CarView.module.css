@@ -17,5 +17,17 @@
 .emphasis {
   font-size: 2em;
   font-weight: bold;
-  text-decoration: dashed;
+  text-decoration: underline;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.divider {
+  height: 90px;
+  width: 1px;
+  border: 1px solid #eed6df;
+  margin: 0 16px;
 }

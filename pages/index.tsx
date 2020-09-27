@@ -10,8 +10,12 @@ const errorMessages = [
   'sorry, hun 💅',
   '👁👄👁',
   "don't have the key so you can't unlock it",
-  'sksksksksksksksks',
+  'SKSKSKSKSKSKSKS',
   "don't bother sweaty",
+  'getting warmer 🔥',
+  'it\'s the lack of knowing the password for me',
+  'Edward Snowden 🧑🏻‍💻🔐💽 is typing...',
+  '🥺👉👈'
 ];
 
 // loadTheme({
@@ -73,10 +77,20 @@ export default function Home() {
     }
   }, [password, localStorageEnabled]);
 
+  const destroyStorage = () => {
+    if (localStorageEnabled) {
+      localStorage.removeItem(LOCAL_STORAGE_VERIFIED)
+    }
+    setPseudoLoggedIn(false)
+    setPassword('')
+    setError('bye hun x')
+  }
+
   return (
     <div>
       <Head>
         <title>𝖌𝖔𝖙𝖍 𝖋𝖗𝖆𝖕𝖕</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         <link rel="icon" href="/favicon.ico" />
         <link
           rel="stylesheet"
@@ -84,11 +98,11 @@ export default function Home() {
         />
       </Head>
       <div className={styles.header}>
-        <span>🧚</span>
+        <span className={styles.goth}>🧚</span>
         <h1>gothfr.app</h1>
       </div>
       {pseudoLoggedIn ? (
-        <CarView />
+        <CarView onLogout={destroyStorage}/>
       ) : (
         <div className={styles.login}>
           <h2 className={styles.loginTitle}>password?</h2>
@@ -97,6 +111,15 @@ export default function Home() {
               onChange={handleInput}
               value={password}
               className={styles.input}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              onKeyDown={event => {
+                if (event.key === 'Enter') {
+                  verifyPassword()
+                }
+              }}
             />
             <button onClick={verifyPassword} className={styles.button}>
               🔓
