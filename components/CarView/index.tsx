@@ -19,7 +19,7 @@ type Props = {
 };
 
 export default function CarView({ onLogout }: Props) {
-  const { data, loading, error } = useGoogleSheets({
+  const { data, loading } = useGoogleSheets({
     apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
     sheetId: process.env.NEXT_PUBLIC_GOOGLE_SHEETS_ID,
     sheetsNames: ["payments", "totals"],
